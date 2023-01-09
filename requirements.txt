@@ -1,0 +1,8 @@
+aiofiles
+aiohttp
+hikari 
+fastapi
+uvicorn
+asyncpg 
+jinja2
+dominate

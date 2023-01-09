@@ -1,0 +1,43 @@
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: lighten;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+img {
+  opacity: 0.5;
+}
+
+#main_page_header {
+  color: black;
+  padding: 20px 10px;
+  font-family: Rockwell Extra Bold, Rockwell Bold, monospace;
+  text-decoration: solid;
+  font-size: xx-large;
+  
+}
+
+.header #header_link_buttons {
+  color: rgb(132, 63, 210);
+  float: right;
+  row-gap: 2px;
+  font-size: small;
+  font-family: "Ubuntu Mono", monospace;
+  align-self: center;
+  border-radius: 4%;
+  shape-rendering: crispEdges;
+  overflow: hidden;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-blend-mode: lighten;
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+
+.header #header_link_buttons:hover {
+  color: black;  
+  font-size:medium;
+  
+ }

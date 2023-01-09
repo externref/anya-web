@@ -1,0 +1,55 @@
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: lighten;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+img {
+  opacity: 0.5;
+}
+
+.session_button:hover{
+    content: "Log-out"
+}
+
+#profile_slot {
+    background: local;
+  background-color: rgb(45, 45, 45);
+  border-color: rgb(45, 45, 45);
+  border-width: 20px;
+  border-radius: 10px;
+  float: right;
+  font-family: Rockwell Extra Bold, Rockwell Bold, monospace;
+}
+
+#profile_image {
+  opacity: 1;
+  float: right;
+  border: 10px;
+  border-style: solid;
+  border-radius: 4%;
+  border-color: rgb(226, 69, 168);
+  align-self: center;
+}
+
+.header #header_link_buttons {
+  color: rgb(132, 63, 210);
+  float: right;
+  row-gap: 2px;
+  font-size: small;
+  font-family: "Ubuntu Mono", monospace;
+  align-self: center;
+  border-radius: 4%;
+  shape-rendering: crispEdges;
+  overflow: hidden;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-blend-mode: lighten;
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+.header #header_link_buttons:hover {
+  color: black;
+  font-size: medium;
+}

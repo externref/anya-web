@@ -1,0 +1,6 @@
+/env
+.env 
+private/
+secrets.py
+.deta/
+**cache**
