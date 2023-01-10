@@ -1,13 +1,16 @@
-import pathlib
 import os
+import pathlib
 import secrets
+
 import aiofiles
+import dotenv
 import fastapi
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from . import discord_rest, html_creator
 
+dotenv.load_dotenv()
 app = fastapi.FastAPI()
 app.mount(
     "/static",
@@ -22,11 +25,14 @@ app.mount(
 templates = Jinja2Templates(directory="static")
 
 
+@app.get("/home")
 @app.get("/", response_class=fastapi.responses.HTMLResponse)
-async def home(request: fastapi.Request):
+async def home():
     async with aiofiles.open("static/home.html") as file:
-        data =await file.read()
-        data=data.replace("$bg_image", secrets.choice(os.listdir("assets/backgrounds")))
+        data = await file.read()
+        data = data.replace(
+            "$bg_image", secrets.choice(os.listdir("assets/backgrounds"))
+        )
     return fastapi.responses.HTMLResponse(data)
 
 
@@ -48,22 +54,31 @@ async def auth(code: str):
         _id = await discord_rest.get_id_from_code(code)
     except Exception as e:
         print(e)
-    return fastapi.responses.RedirectResponse(f"/dashboard/{_id}")
+    return fastapi.responses.RedirectResponse(
+        f"/dashboard/{_id}",
+    )
 
 
 @app.get("/dashboard/{user_id}")
 async def dash(user_id: int):
-    
+
     try:
 
-        return fastapi.responses.HTMLResponse(html_creator.create_user_profile_tag(discord_rest.user_object_map[user_id]))
+        return fastapi.responses.HTMLResponse(
+            await html_creator.create_user_profile_tag(
+                discord_rest.user_object_map[int(user_id)]
+            )
+        )
     except KeyError:
         return fastapi.responses.RedirectResponse(
-        "https://discord.com/api/oauth2/authorize?client_id=979906554188939264&redirect_uri=https%3A%2F%2Fanya.deta.dev%2Fauth&response_type=code&scope=identify"
-    )
-        
-@app.get("/logout/{user_id}")
-async def logout(user_id: int ):
-    discord_rest.user_object_map.pop(user_id)
-    return fastapi.responses.RedirectResponse("/home")
+            "https://discord.com/api/oauth2/authorize?client_id=979906554188939264&redirect_uri=https%3A%2F%2Fanya.deta.dev%2Fauth&response_type=code&scope=identify"
+        )
 
+
+@app.get("/logout/{user_id}")
+async def logout(user_id: int):
+    try:
+        discord_rest.user_object_map.pop(user_id)
+    except Exception:
+        ...
+    return fastapi.responses.RedirectResponse("/home")

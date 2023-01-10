@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>$user_name#$user_discrim | Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body style="background-color: #ffa9fe;">
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="margin-bottom: auto;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">ANYA</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a type="button" class="glyphicon glyphicon-heart" href="https://discord.com/invite/FyEE54u9GF">
+                        Support Server
+                    </a>
+                </li>
+                <li>
+                    <a type="button" class="glyphicon glyphicon-link"
+                        href="https://discord.com/api/oauth2/authorize?client_id=979906554188939264&permissions=516020358208&scope=bot%20applications.commands">
+                        Invite Bot
+                    </a>
+                </li>
+                <li>
+                    <a type="button" class="glyphicon glyphicon-log-out" href="/logout/$user_id">
+                        Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav><br>
+    <div align="center" style="margin-top: 100px;">
+        <img src="$avatar" class="img-circle"><br><br>
+        User tag: $user_name#$user_discrim <br>
+        User ID: $user_id<br>
+        Created on: $created_at
+    </div>
+</body>
+
+</html>
