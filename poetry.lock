@@ -797,6 +797,21 @@ all = ["twine (>=3.4.1)"]
 dev = ["twine (>=3.4.1)"]
 
 [[package]]
+name = "python-dotenv"
+version = "0.21.0"
+description = "Read key-value pairs from a .env file and set them as environment variables"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "python-dotenv-0.21.0.tar.gz", hash = "sha256:b77d08274639e3d34145dfa6c7008e66df0f04b7be7a75fd0d5292c191d79045"},
+    {file = "python_dotenv-0.21.0-py3-none-any.whl", hash = "sha256:1684eb44636dd462b66c3ee016599815514527ad99965de77f43e0944634a7e5"},
+]
+
+[package.extras]
+cli = ["click (>=5.0)"]
+
+[[package]]
 name = "ruff"
 version = "0.0.214"
 description = "An extremely fast Python linter, written in Rust."
@@ -1004,4 +1019,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "aa76a1d6b6fdbc69c3310726babc702bada8cd2dee39509da831fb44a0d6c80d"
+content-hash = "58cbe8d91fd72fac6f24344f9902536f73694bc59bbdb16daa0239e610429e7c"
