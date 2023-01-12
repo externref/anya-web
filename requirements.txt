@@ -6,3 +6,4 @@ uvicorn
 asyncpg 
 jinja2
 dominate
+python-dotenv

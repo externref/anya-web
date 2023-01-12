@@ -8,10 +8,17 @@
     <title>$user_name#$user_discrim | Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    <style>
+        .navbar {
+            border-radius: 0 !important;
+        }
+    </style>
+
 </head>
 
 <body style="background-color: #ffa9fe;">
-    <nav class="navbar navbar-inverse navbar-fixed-top" style="margin-bottom: auto;">
+    <nav class="navbar navbar-inverse navbar-sticky-top" style="margin-bottom: 10px; border-radius: 0%;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">ANYA</a>
@@ -29,18 +36,19 @@
                     </a>
                 </li>
                 <li>
-                    <a type="button" class="glyphicon glyphicon-log-out" href="/logout/$user_id">
+                    <a type="button" class="glyphicon glyphicon-log-out" href="/logout">
                         Logout</a>
                 </li>
             </ul>
         </div>
     </nav><br>
-    <div align="center" style="margin-top: 100px;">
+    <div align="center" style="font-family: Rockwell Extra Bold, Rockwell Bold, monospace;">
         <img src="$avatar" class="img-circle"><br><br>
         User tag: $user_name#$user_discrim <br>
         User ID: $user_id<br>
         Created on: $created_at
     </div>
-</body>
 
-</html>
+
+
+      
