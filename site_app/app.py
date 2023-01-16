@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import os
 import pathlib
-import secrets
 import uuid
 
 import aiofiles
@@ -44,7 +42,6 @@ async def home(request: fastapi.Request):
         if oauth := await db_handler.database.get_oauth(
             request.cookies.get("session_id")
         ):
-            print(1)
             user = await discord_rest.fetch_user(oauth)
             data = data.replace(
                 """class="glyphicon glyphicon-log-in" href="./login""",
@@ -53,10 +50,8 @@ async def home(request: fastapi.Request):
                 "Login",
                 f"""<img class="img-circle" src="{user.display_avatar_url}" style="height: 30px;width:30px;"> {str(user)}""",
             )
-        res = fastapi.responses.HTMLResponse(data)
-        if not auth:
-            res.set_cookie("session_id", uuid.uuid4())
-        return res
+        return fastapi.responses.HTMLResponse(data)
+
     except Exception as e:
         print(e)
 
@@ -69,12 +64,12 @@ async def favicon():
 @app.get("/login")
 async def login(request: fastapi.Request):
     try:
+        await _()
         if await db_handler.database.pool.fetchval(
             "SELECT * FROM login_data WHERE session_id = $1",
-            (s_id := request.cookies.get("session_id")),
+            (request.cookies.get("session_id")),
         ):
             res = fastapi.responses.RedirectResponse("/dashboard")
-            res.set_cookie("session_id", s_id)
             return res
         res = fastapi.responses.RedirectResponse(
             "https://discord.com/api/oauth2/authorize?client_id=979906554188939264&redirect_uri=https%3A%2F%2Fanyaa.ml%2Fauth&response_type=code&scope=identify%20guilds"
@@ -87,16 +82,14 @@ async def login(request: fastapi.Request):
 
 @app.get("/auth/")
 async def auth(request: fastapi.Request, code: str):
-
+    await _()
     if not request.cookies.get("session_id"):
         return fastapi.responses.RedirectResponse("/")
     try:
-        print(request.cookies)
         await discord_rest.register_login(request.cookies["session_id"], code)
         res = fastapi.responses.RedirectResponse(
             "/dashboard",
         )
-        res.set_cookie("session_id", request.cookies["session_id"])
         return res
     except Exception as e:
         print(e)
@@ -104,11 +97,10 @@ async def auth(request: fastapi.Request, code: str):
 
 @app.get("/dashboard")
 async def dash(request: fastapi.Request):
-
+    await _()
     if not request.cookies.get("session_id"):
         return fastapi.responses.RedirectResponse("/")
     try:
-        print(request.cookies)
         if await db_handler.database.pool.fetchval(
             "SELECT * FROM login_data WHERE session_id = $1",
             (s_id := request.cookies["session_id"]),
@@ -120,7 +112,6 @@ async def dash(request: fastapi.Request):
                 )
                 + await html_creator.add_guilds(await discord_rest.fetch_guilds(oauth))
             )
-            res.set_cookie("session_id", request.cookies["session_id"])
             return res
         else:
             return fastapi.responses.RedirectResponse(
@@ -132,10 +123,36 @@ async def dash(request: fastapi.Request):
 
 @app.get("/logout")
 async def logout(request: fastapi.Request):
-
+    await _()
     if not request.cookies.get("session_id"):
         return fastapi.responses.RedirectResponse("/")
     await db_handler.database.pool.execute(
         "DELETE from login_data WHERE session_id = $1", request.cookies["session_id"]
     )
     return fastapi.responses.RedirectResponse("/home")
+
+
+@app.get("/invite")
+async def invite():
+    return fastapi.responses.RedirectResponse(
+        "https://discord.com/api/oauth2/authorize?client_id=979906554188939264&permissions=516020358208&scope=bot%20applications.commands"
+    )
+
+
+@app.get("/manage/{guild_id}")
+async def manage(request: fastapi.Request, guild_id: int):
+    try:
+        await _()
+        if not request.cookies.get("session_id"):
+            return fastapi.responses.RedirectResponse("/")
+        if await db_handler.database.pool.fetchval(
+            "SELECT * FROM login_data WHERE session_id = $1",
+            (s_id := request.cookies["session_id"]),
+        ):
+            oauth = await db_handler.database.get_oauth(s_id)
+            guild = await discord_rest.fetch_guild(oauth, guild_id)
+            return fastapi.responses.HTMLResponse(
+                await html_creator.manage_page(guild)
+            )
+    except Exception as e:
+        print(e)

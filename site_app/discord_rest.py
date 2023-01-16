@@ -43,6 +43,10 @@ async def fetch_user(oauth: OauthRecord) -> hikari.OwnUser:
     async with bot.acquire(oauth.access_token, oauth.token_type) as rest:
         return await rest.fetch_my_user()
 
+async def fetch_guild(oauth: OauthRecord, g_id: int) -> hikari.OwnGuild:
+    await _check()
+    async with bot.acquire(os.environ['BOT_TOKEN'], hikari.TokenType.BOT) as rest:
+        return await rest.fetch_guild(g_id)
 
 async def fetch_guilds(oauth: OauthRecord) -> list[hikari.OwnGuild]:
 

@@ -52,7 +52,7 @@ async def add_guilds(guilds: list[hikari.OwnGuild]) -> str:
                 )
                 .replace("$forward_url", f"manage/{guild.id}")
                 .replace("$text", "Manage")
-                .replace("$gly", "pencil")
+                .replace("$gly", "cog")
             )
     for guild in guilds:
         if guild not in bot_guilds and (
@@ -72,3 +72,20 @@ async def add_guilds(guilds: list[hikari.OwnGuild]) -> str:
             )
 
     return txt + "</body></html>"
+
+
+async def manage_page(guild: hikari.Guild) -> str:
+    async with aiofiles.open("static/manage.html") as file:
+        data = await file.read()
+
+    return (
+        data.replace(
+            "$guild_icon",
+            str(guild.icon_url)
+            if guild.icon_url
+            else "https://cdn.discordapp.com/embed/avatars/0.png",
+        )
+        .replace("$guild_id", str(guild.id))
+        .replace("$guild", guild.name)
+        .replace("$created_at", guild.created_at.strftime("%d-%B-%y"))
+    )

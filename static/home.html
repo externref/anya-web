@@ -5,20 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ANYA</title>
+    <meta content="ANYA" property="og:title" />
+    <meta
+      content="A multipurpose discord bot with utility and automation features!"
+      property="og:description"
+    />
+    <meta content="https://anyaa.ml" property="og:url" />
+    <meta content="https://i.imgur.com/bTPsA9q.png" property="og:image" />
+    <meta content="#FADFAD" data-react-helmet="true" name="theme-color" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
+    <style>
+      #banner {
+        background-repeat: no-repeat;
+        height: 480px;
+        text-align: center;
+        vertical-align: middle;
+        padding: 60px;
+      }
+
+      .middle {
+        position: relative;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+
+      .vertical-centre .badge:hover {
+        background-color: blue;
+      }
+    </style>
   </head>
 
   <body style="background-color: #ffa9fe">
     <nav
       class="navbar navbar-inverse navbar-sticky-top"
-      style="margin-bottom: 10px; border-radius: 0%"
+      style="border-radius: 0%"
     >
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">ANYA</a>
+          <img
+            class="navbar-left img-circle"
+            src="../assets/icon.png"
+            height="30"
+            width="30"
+            style="max-width: 30px; margin-top: 10px"
+          />
+          <a class="navbar-brand" href="/">&nbsp ANYA</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
           <li>
@@ -40,17 +76,26 @@
             </a>
           </li>
           <li>
-            <a type="button" class="glyphicon glyphicon-log-in" href="./login"> Login</a>
+            <a type="button" class="glyphicon glyphicon-log-in" href="./login">
+              Login</a
+            >
           </li>
         </ul>
       </div>
     </nav>
+    <div class="header" id="banner">
+      <h1 class="display-4 vertical-center" style="font-size: 120px">ANYA</h1>
 
-    <div class="jumbotron" style="background-color: #ffa9fe">
-      <h1 class="display-4">ANYA</h1>
-      <p>
+      <p class="vertical-center">
         A multipurpose discord bot with awesome utility and automation features.
       </p>
+      <a class="badge badge-pill badge-dark" href="/commands">Commands</a>
+      <a
+        class="badge badge-pill badge-dark"
+        href="https://github.com/sarthhh/anya"
+        >Source Code</a
+      >
+      <a class="badge badge-pill badge-dark" href="/stats">Bot stats</a>
     </div>
   </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>$user_name#$user_discrim | Dashboard</title>
+    <title>$guild | Manage</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -22,6 +22,7 @@
       .navbar {
         border-radius: 0 !important;
       }
+
     </style>
   </head>
 
@@ -30,18 +31,18 @@
       class="navbar navbar-inverse navbar-sticky-top"
       style="margin-bottom: 10px; border-radius: 0%"
     >
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <img
-            class="navbar-left img-circle"
-            src="../assets/icon.png"
-            height="30"
-            width="30"
-            style="max-width: 30px; margin-top: 10px"
-          />
-          <a class="navbar-brand" href="/">&nbsp ANYA</a>
+    <div class="container-fluid">
+        <div class="navbar-header"><img
+          class="navbar-left img-circle "
+          src="../assets/icon.png"
+          height="30"
+          width="30"
+          style="max-width: 30px;margin-top: 10px;"
+        />
+          <a class="navbar-brand" href="/"
+            >&nbsp ANYA</a>
         </div>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" >
           <li>
             <a
               type="button"
@@ -61,6 +62,15 @@
             </a>
           </li>
           <li>
+            <a
+              type="button"
+              class="glyphicon glyphicon-th-list"
+              href="/dashboard"
+            >
+              Dashboard
+            </a>
+          </li>
+          <li>
             <a type="button" class="glyphicon glyphicon-log-out" href="/logout">
               Logout</a
             >
@@ -68,14 +78,14 @@
         </ul>
       </div>
     </nav>
-    <br />
+
     <div
       align="center"
       style="font-family: Rockwell Extra Bold, Rockwell Bold, monospace"
     >
-      <img src="$avatar" class="img-circle" /><br /><br />
-      User tag: $user_name#$user_discrim <br />
-      User ID: $user_id<br />
+      <img src="$guild_icon" class="img-circle" /><br /><br />
+      Server: $guild <br />
+      Server ID: $guild_id<br />
       Created on: $created_at
     </div>
   </body>
